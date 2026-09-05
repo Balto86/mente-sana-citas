@@ -1,13 +1,28 @@
-name: CI - Centro Psicologico Mente Sana 
-on: 
-  push: 
-    branches: [ main ] 
-  pull_request: 
-    branches: [ main ] 
-jobs: 
-  verificar: 
-    runs-on: ubuntu-latest 
-    steps: 
-      - uses: actions/checkout@v4 
-      - name: Verificar ejecucion 
-        run: echo "Pipeline ejecutado correctamente" 
+name: CI - Centro Psicologico Mente Sana
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código fuente
+        uses: actions/checkout@v4
+
+      - name: Configurar entorno Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias de testing
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+
+      - name: Ejecutar Pruebas Automatizadas (CP-05)
+        run: |
+          pytest
