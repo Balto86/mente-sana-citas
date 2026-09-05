@@ -1,14 +1,10 @@
 name: CI - Centro Psicologico Mente Sana
 
-on:
-  push:
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
   verificar:
     runs-on: ubuntu-latest
-
     steps:
       - name: Descargar el código fuente
         uses: actions/checkout@v4
@@ -23,5 +19,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
 
-      - name: Ejecutar pruebas automatizadas
-        run: pytest
+      - name: Ejecutar Pruebas Automatizadas
+        run: |
+          pytest
